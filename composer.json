@@ -1,0 +1,24 @@
+{
+  "name": "tigrov/yii3-benchmarks",
+  "type": "project",
+  "description": "Benchmarks for Yii 3",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "yiisoft/db-pgsql": "^1.0",
+    "phpbench/phpbench": "^1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tigrov\\Yii3\\Benchmarks\\": "src"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

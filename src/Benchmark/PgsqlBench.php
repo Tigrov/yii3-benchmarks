@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tigrov\Yii3\Benchmarks\Benchmark;
 
+use Tigrov\Yii3\Benchmarks\Pgsql\ConstructorArrayParser;
 use Tigrov\Yii3\Benchmarks\Pgsql\StaticArrayParser;
 use Yiisoft\Db\Pgsql\ArrayParser;
 use Yiisoft\Db\Pgsql\ColumnSchema;
@@ -68,9 +69,19 @@ class PgsqlBench
         $parsedArray = StaticArrayParser::parse($this->rawIntArray);
     }
 
+    public function benchParseIntArrayConstructor(): void
+    {
+        $parsedArray = (new ConstructorArrayParser($this->rawIntArray))->parse();
+    }
+
+    public function benchParseIntArrayCallable(): void
+    {
+        $parsedArray = (new ConstructorArrayParser($this->rawIntArray))();
+    }
+
     public function benchParseThenIntvalIntArray(): void
     {
-        $parsedArray = (new StaticArrayParser())->parse($this->rawIntArray);
+        $parsedArray = $this->getArrayParser()->parse($this->rawIntArray);
         $castArray = array_map('intval', $parsedArray);
     }
 

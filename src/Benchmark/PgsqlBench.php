@@ -18,7 +18,7 @@ use Yiisoft\Db\Schema\SchemaInterface;
  */
 class PgsqlBench
 {
-    private const ITEMS_COUNT = 1000;
+    private const ITEMS_COUNT = 1;
 
     private string $rawIntArray;
 

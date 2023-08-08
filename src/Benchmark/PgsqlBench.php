@@ -24,7 +24,7 @@ class PgsqlBench
 
     private ColumnSchema $column;
 
-    private ArrayParser $parser;
+    private ?ArrayParser $parser = null;
 
     /**
      * Load the bulk of the definitions.
@@ -39,8 +39,6 @@ class PgsqlBench
         $this->column->dbType(SchemaInterface::TYPE_INTEGER);
         $this->column->phpType(SchemaInterface::PHP_TYPE_INTEGER);
         $this->column->dimension(1);
-
-        $this->parser = new ArrayParser();
     }
 
     public function benchParseIntArrayCurrent(): void
@@ -50,7 +48,7 @@ class PgsqlBench
 
     public function benchParseIntArrayProperty(): void
     {
-        $parsedArray = $this->parser->parse($this->rawIntArray);
+        $parsedArray = $this->createAndGetArrayParser()->parse($this->rawIntArray);
     }
 
     public function benchParseIntArrayVar(): void
@@ -93,5 +91,13 @@ class PgsqlBench
     private function getArrayParser(): ArrayParser
     {
         return new ArrayParser();
+    }
+
+    private function createAndGetArrayParser(): ArrayParser
+    {
+        if ($this->parser === null) {
+            $this->parser = new ArrayParser();
+        }
+        return $this->parser;
     }
 }

@@ -7,6 +7,7 @@ namespace Tigrov\Yii3\Benchmarks\Benchmark;
 use Yiisoft\Db\Schema\Quoter;
 
 use function array_map;
+use function array_walk;
 use function range;
 use function str_repeat;
 
@@ -64,5 +65,10 @@ class QuoteArrayBench
     public function benchArrayMapMethod(): void
     {
         $this->array = array_map([$this->quoter, 'quoteColumnName'], $this->array);
+    }
+
+    public function benchArrayWalk(): void
+    {
+        array_walk($this->array, fn (&$value) => $value = $this->quoter->quoteColumnName($value));
     }
 }

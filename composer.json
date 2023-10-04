@@ -5,6 +5,7 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
+    "yiisoft/db": "^1.0",
     "yiisoft/db-pgsql": "^1.0",
     "phpbench/phpbench": "^1.2"
   },

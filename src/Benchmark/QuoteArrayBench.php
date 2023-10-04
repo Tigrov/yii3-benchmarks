@@ -71,4 +71,11 @@ class QuoteArrayBench
     {
         array_walk($this->array, fn (&$value) => $value = $this->quoter->quoteColumnName($value));
     }
+
+    public function benchFor(): void
+    {
+        for ($i = 0, $count = count($this->array); $i < $count; ++$i) {
+            $this->array[$i] = $this->quoter->quoteColumnName($this->array[$i]);
+        }
+    }
 }
